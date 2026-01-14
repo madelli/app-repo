@@ -1,3 +1,4 @@
+# This workflow builds and pushes the API image
 name: Build and Push API
 
 on:
