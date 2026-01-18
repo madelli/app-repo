@@ -28,6 +28,7 @@ jobs:
 
       - name: Run Cold Operator
         run: node ops/cold-operator/cold-operator.js
+        working-directory: ./
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
