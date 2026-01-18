@@ -2,16 +2,16 @@
 
 import { execSync } from "child_process";
 
-export async function collectGitOpsState() {
+/**
+ * Cold Operator の GitOps 状態収集ロジック
+ */
+export async function collectGitOps() {
   try {
-    // Flux の kustomization 状態を JSON で取得
     const output = execSync("flux get kustomizations -o json", {
       encoding: "utf8"
     });
 
     const data = JSON.parse(output);
-
-    // ここでは最初の kustomization を対象にする（必要なら複数対応も可能）
     const ks = data.items?.[0];
 
     if (!ks) {
