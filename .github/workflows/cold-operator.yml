@@ -22,18 +22,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Flux CLI のインストール（GitOps 解析のため）
       - name: Install Flux CLI
         run: |
           curl -s https://fluxcd.io/install.sh | sudo bash
 
-      # Cold Operator の実行
       - name: Run Cold Operator
         run: node ops/cold-operator/cold-operator.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # PR にコメント投稿
       - name: Post Comment
         uses: actions/github-script@v7
         with:
