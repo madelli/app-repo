@@ -1,29 +1,49 @@
-// cold-operator.js
+// ops/cold-operator/cold-operator.js
 
-import { collectSystemState } from "./collectors/index.js";
-import { decideNextActions } from "./core/index.js";
-import { formatColdOperatorComment } from "./formatters/cold-operator-style.js";
 import fs from "fs";
+import { collectPRs } from "./collectors/pr.js";
+import { collectGitOps } from "./collectors/gitops.js";
+import { collectCICD } from "./collectors/cicd.js";
+import { collectMetrics } from "./collectors/metrics.js";
+
+import { decideNextActions } from "./core/index.js";
+import { formatComment } from "./formatter/index.js";
 
 async function main() {
-  try {
-    const systemState = await collectSystemState();
-    const result = decideNextActions(systemState);
-    const comment = formatColdOperatorComment(result.navigator);
+  console.log("Cold Operator: Starting analysis...");
 
-    fs.writeFileSync(
-      "cold-operator-output.json",
-      JSON.stringify({ comment }, null, 2)
-    );
+  // --- Collector Phase ---
+  const pullRequests = await collectPRs();
+  const gitops = await collectGitOps();
+  const cicd = await collectCICD();
+  const metrics = await collectMetrics();
 
-    console.log("Cold Operator completed. Output saved.");
-  } catch (err) {
-    console.error("Cold Operator failed:", err);
-    fs.writeFileSync(
-      "cold-operator-output.json",
-      JSON.stringify({ comment: "解析失敗。Cold Operator に異常が発生しました。" }, null, 2)
-    );
-  }
+  const systemState = {
+    pullRequests,
+    gitops,
+    cicd,
+    metrics
+  };
+
+  // --- Analyzer + Navigator Phase ---
+  const result = decideNextActions(systemState);
+
+  // --- Formatter Phase ---
+  const comment = formatComment(result);
+
+  // --- Output JSON ---
+  const output = {
+    comment,
+    raw: result.raw,
+    navigator: result.navigator
+  };
+
+  fs.writeFileSync("cold-operator-output.json", JSON.stringify(output, null, 2));
+
+  console.log("Cold Operator: Analysis complete.");
 }
 
-main();
+main().catch((err) => {
+  console.error("Cold Operator failed:", err);
+  process.exit(1);
+});
