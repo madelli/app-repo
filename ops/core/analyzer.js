@@ -74,6 +74,7 @@ export function analyzeCICD(cicd) {
     if (wf.conclusion === "success") continue;
 
     let priority = "medium";
+
     // deploy などの名前を含む場合は優先度を上げる
     if (wf.name && /deploy/i.test(wf.name)) {
       priority = "high";
@@ -159,12 +160,14 @@ function buildCICDReason(wf) {
     parts.push(`結果：${wf.conclusion}`);
   }
 
-  if (wf.run_duration_seconds != null) {
-    parts.push(`実行時間：${wf.run_duration_seconds}s`);
+  // formatter に合わせて duration を使用
+  if (wf.duration != null) {
+    parts.push(`実行時間：${wf.duration}s`);
   }
 
-  if (wf.html_url) {
-    parts.push(`詳細：${wf.html_url}`);
+  // formatter が url に変換している可能性に対応
+  if (wf.url || wf.html_url) {
+    parts.push(`詳細：${wf.url || wf.html_url}`);
   }
 
   if (parts.length === 0) {

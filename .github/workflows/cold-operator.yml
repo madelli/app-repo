@@ -37,7 +37,9 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const output = fs.readFileSync('cold-operator-output.json', 'utf8');
+
+            // ★ 修正ポイント：Cold Operator の出力ファイルの正しいパス
+            const output = fs.readFileSync('ops/cold-operator/outputs/state.json', 'utf8');
             const data = JSON.parse(output);
 
             github.rest.issues.createComment({

@@ -43,12 +43,27 @@ export function buildSummary(sortedActions) {
   }
 
   const top = sortedActions[0];
+  const highCount = sortedActions.filter(a => a.priority === "high").length;
 
   return {
-    summary: "次の操作を推奨。",
+    summary: highCount > 1
+      ? `高優先度のアクションが ${highCount} 件あります`
+      : "次の操作を推奨。",
     reason: top.reason,
     recommended_action: top.recommendedAction
   };
+}
+
+// ─────────────────────────────
+// 種別ごとにグルーピング
+// ─────────────────────────────
+function groupByType(actions) {
+  const groups = {};
+  for (const action of actions) {
+    if (!groups[action.type]) groups[action.type] = [];
+    groups[action.type].push(action);
+  }
+  return groups;
 }
 
 // ─────────────────────────────
@@ -57,9 +72,12 @@ export function buildSummary(sortedActions) {
 export function buildNavigator(actions) {
   const sorted = sortByPriority(actions);
   const summary = buildSummary(sorted);
+  const grouped = groupByType(sorted);
 
   return {
     summary,
+    nextAction: sorted[0] || null,
+    grouped,
     actions: sorted
   };
 }

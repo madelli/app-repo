@@ -1,0 +1,83 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: system-ui, sans-serif;
+  color: #333;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  cursor: pointer;
+}
+
+.header nav a {
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.main {
+  display: flex;
+  margin-top: 30px;
+}
+
+.articles {
+  flex: 3;
+}
+
+.articles article {
+  margin-bottom: 30px;
+}
+
+.sidebar {
+  flex: 1;
+  margin-left: 40px;
+}
+
+.footer {
+  margin-top: 40px;
+  text-align: center;
+  cursor: pointer;
+  color: #777;
+}
+
+/* Secret Modal */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: #111;
+  padding: 30px;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+}
+
+.modal input {
+  width: 200px;
+  padding: 8px;
+  margin-top: 10px;
+}
+
+.modal button {
+  margin-top: 15px;
+  padding: 8px 20px;
+  background: #444;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
