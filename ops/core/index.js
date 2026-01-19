@@ -9,6 +9,10 @@ import {
 
 import { buildNavigator } from "./navigator.js";
 
+/**
+ * Cold Operator の意思決定ロジック
+ * collectors → analyzer → navigator → decisions
+ */
 export function decideNextActions(systemState) {
   // Analyzer: 各領域の解析
   const prActions = analyzePRs(systemState.pullRequests || []);
