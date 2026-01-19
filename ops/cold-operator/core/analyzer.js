@@ -4,6 +4,8 @@
 // type: "pr" | "gitops" | "cicd" | "metrics"
 
 export function analyzePRs(prs) {
+  if (!Array.isArray(prs)) return [];
+
   const actions = [];
 
   for (const pr of prs) {
