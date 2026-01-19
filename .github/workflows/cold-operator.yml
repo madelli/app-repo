@@ -8,6 +8,10 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
 
+    permissions:
+      issues: write
+      pull-requests: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,7 +42,6 @@ jobs:
           script: |
             const fs = require('fs');
 
-            // ★ 修正ポイント：Cold Operator の出力ファイルの正しいパス
             const output = fs.readFileSync('ops/cold-operator/outputs/state.json', 'utf8');
             const data = JSON.parse(output);
 
