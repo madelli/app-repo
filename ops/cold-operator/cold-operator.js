@@ -8,6 +8,7 @@ import { collectMetrics } from "./collectors/metrics.js";
 
 import { decideNextActions } from "./core/index.js";
 import { formatComment } from "./formatter/index.js";
+import { buildColdOperatorState } from "./core/state.js";
 
 async function main() {
   console.log("Cold Operator: Starting analysis...");
@@ -30,6 +31,9 @@ async function main() {
 
   // --- Formatter Phase ---
   const comment = formatComment(result);
+
+  // --- State Model Output ---
+  const stateModel = buildColdOperatorState(systemState);
 
   // --- Output JSON ---
   const output = {
