@@ -1,62 +1,12 @@
 // ops/cold-operator/formatter/index.js
 
-/**
- * CI/CD の生データを Cold Operator 標準フォーマットに整形する
- * @param {Object} state - collectCICDState() が返すデータ
- * @returns {Object} formatted - 整形済みデータ
- */
-export function formatCICDState(state) {
-  if (!state || !state.workflows) {
-    return {
-      summary: "No workflow data available",
-      workflows: []
-    };
-  }
-
-  const workflows = state.workflows.map(wf => ({
-    id: wf.id,
-    name: wf.name,
-    status: wf.status,
-    conclusion: wf.conclusion,
-    url: wf.html_url,
-    started_at: wf.run_started_at,
-    duration: wf.run_duration_seconds,
-    // Cold Operator 用の追加メタ情報
-    status_label: formatStatusLabel(wf.status, wf.conclusion),
-    duration_label: wf.run_duration_seconds
-      ? `${wf.run_duration_seconds}s`
-      : "N/A"
-  }));
-
-  return {
-    summary: generateSummary(workflows),
-    workflows
-  };
-}
+import { formatColdOperatorComment } from "./style.js";
 
 /**
- * ステータスと結論から、人間が理解しやすいラベルを生成
+ * Cold Operator のコメント生成エントリ
+ * @param {Object} result - decideNextActions() の返却結果
+ * @returns {string} comment - PR に投稿するコメント本文
  */
-function formatStatusLabel(status, conclusion) {
-  if (status === "queued") return "🟡 キュー待ち";
-  if (status === "in_progress") return "🔵 実行中";
-
-  if (status === "completed") {
-    if (conclusion === "success") return "🟢 成功";
-    if (conclusion === "failure") return "🔴 失敗";
-    if (conclusion === "cancelled") return "⚪ キャンセル";
-  }
-
-  return "⚫ 不明";
-}
-
-/**
- * 全体のサマリーを生成
- */
-function generateSummary(workflows) {
-  if (workflows.length === 0) return "No workflow runs detected";
-
-  const latest = workflows[0];
-
-  return `Latest workflow "${latest.name}" is ${latest.status_label} (${latest.duration_label})`;
+export function formatComment(result) {
+  return formatColdOperatorComment(result.navigator);
 }
