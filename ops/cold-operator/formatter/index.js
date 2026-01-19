@@ -1,6 +1,7 @@
 // ops/cold-operator/formatter/index.js
 
 import { formatColdOperatorComment } from "./style.js";
+import { formatCICDState } from "./cicd.js";
 
 /**
  * Cold Operator のコメント生成エントリ
@@ -10,3 +11,6 @@ import { formatColdOperatorComment } from "./style.js";
 export function formatComment(result) {
   return formatColdOperatorComment(result.navigator);
 }
+
+// GitHub Actions 用の状態整形関数
+export { formatCICDState };
