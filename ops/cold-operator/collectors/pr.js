@@ -3,7 +3,10 @@
 import fs from "fs";
 import fetch from "node-fetch";
 
-export async function collectPRState() {
+/**
+ * Cold Operator の Pull Request 状態収集ロジック
+ */
+export async function collectPRs() {
   const eventPath = process.env.GITHUB_EVENT_PATH;
   const event = JSON.parse(fs.readFileSync(eventPath, "utf8"));
 
@@ -13,7 +16,6 @@ export async function collectPRState() {
 
   const token = process.env.GITHUB_TOKEN;
 
-  // PR の差分を取得
   const diffUrl = `https://api.github.com/repos/${owner}/${repoName}/pulls/${prNumber}/files`;
 
   const res = await fetch(diffUrl, {
@@ -25,7 +27,6 @@ export async function collectPRState() {
 
   const files = await res.json();
 
-  // 差分解析（Cold Operator 用）
   const parsed = files.map((f) => {
     return {
       filename: f.filename,
@@ -37,21 +38,22 @@ export async function collectPRState() {
     };
   });
 
-  return [
-    {
-      id: prNumber,
-      diff: {
-        files: parsed.length,
-        linesChanged: parsed.reduce((sum, f) => sum + f.changes, 0),
-        impactArea: summarizeImpact(parsed)
-      },
-      security: { risk: "none" }, // 後で実装
-      gitops: detectGitOpsChanges(parsed)
-    }
-  ];
+  return {
+    prs: [
+      {
+        id: prNumber,
+        diff: {
+          files: parsed.length,
+          linesChanged: parsed.reduce((sum, f) => sum + f.changes, 0),
+          impactArea: summarizeImpact(parsed)
+        },
+        security: { risk: "none" },
+        gitops: detectGitOpsChanges(parsed)
+      }
+    ]
+  };
 }
 
-// 影響範囲の判定
 function detectImpactArea(filename) {
   if (filename.startsWith("api/")) return "API";
   if (filename.startsWith("frontend/")) return "Frontend";
@@ -61,14 +63,12 @@ function detectImpactArea(filename) {
   return "Other";
 }
 
-// PR 全体の影響範囲をまとめる
 function summarizeImpact(files) {
   const areas = new Set(files.map((f) => f.impactArea));
   if (areas.size === 1) return [...areas][0];
   return "Multiple";
 }
 
-// GitOps 変更の検出
 function detectGitOpsChanges(files) {
   const hasManifest = files.some((f) =>
     f.filename.includes("deployment") ||
