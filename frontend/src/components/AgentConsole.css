@@ -1,0 +1,171 @@
+/* AgentConsole.css - Layer 3 Console Styles */
+
+.console-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+  color: #00ff88;
+  font-family: 'Courier New', monospace;
+  padding: 20px;
+}
+
+.console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #00ff88;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.console-header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+  text-shadow: 0 0 10px #00ff88;
+}
+
+.layer-badge {
+  background: #00ff88;
+  color: #0a0a0a;
+  padding: 5px 15px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+/* Agent Panel */
+.agent-panel {
+  background: rgba(0, 255, 136, 0.05);
+  border: 1px solid #333;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.agent-panel h2 {
+  margin: 0 0 15px 0;
+  font-size: 1.2rem;
+  color: #888;
+}
+
+.agent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.agent-card {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #333;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.agent-card:hover {
+  border-color: #00ff88;
+  transform: translateY(-2px);
+}
+
+.agent-card.active {
+  border-color: #00ff88;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+}
+
+.agent-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #00ff88;
+}
+
+.agent-title {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+.active-agent-info {
+  padding: 10px;
+  background: rgba(0, 255, 136, 0.1);
+  border-left: 3px solid #00ff88;
+}
+
+/* Console Output */
+.console-output {
+  background: #000;
+  border: 1px solid #333;
+  min-height: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+.log-entry {
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.log-time {
+  color: #666;
+  margin-right: 10px;
+}
+
+.log-agent {
+  color: #ff6b6b;
+  margin-right: 10px;
+}
+
+.log-command {
+  color: #00ff88;
+}
+
+.log-response {
+  color: #888;
+  margin-top: 5px;
+  padding-left: 20px;
+  border-left: 2px solid #333;
+}
+
+/* Console Input */
+.console-input-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #000;
+  border: 1px solid #00ff88;
+  padding: 10px 15px;
+}
+
+.prompt-symbol {
+  color: #00ff88;
+  white-space: nowrap;
+}
+
+.console-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #00ff88;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  outline: none;
+}
+
+.console-input::placeholder {
+  color: #444;
+}
+
+.execute-btn {
+  background: #00ff88;
+  color: #0a0a0a;
+  border: none;
+  padding: 8px 20px;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.execute-btn:hover {
+  background: #00cc6a;
+}

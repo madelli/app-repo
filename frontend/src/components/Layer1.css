@@ -1,0 +1,477 @@
+/**
+ * Layer 1 - Ritualistic Entry Portal Styles
+ *
+ * Design principles:
+ * - Cold, ceremonial aesthetic
+ * - Low saturation dark palette
+ * - Geometric patterns and frames
+ * - Staged fade-in animations
+ */
+
+/* ============================================
+   Base Container
+   ============================================ */
+
+.layer1-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #0a0c10 0%, #0d1117 50%, #0a0c10 100%);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
+.layer1-container.visible {
+  opacity: 1;
+}
+
+/* ============================================
+   Background Elements
+   ============================================ */
+
+.l1-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(56, 139, 180, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 139, 180, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.l1-bg-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba(56, 139, 180, 0.06) 0%,
+    rgba(56, 139, 180, 0.02) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ============================================
+   Corner Markers
+   ============================================ */
+
+.l1-corner {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(56, 139, 180, 0.15);
+  pointer-events: none;
+}
+
+.l1-corner.top-left {
+  top: 25px;
+  left: 25px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.l1-corner.top-right {
+  top: 25px;
+  right: 25px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.l1-corner.bottom-left {
+  bottom: 25px;
+  left: 25px;
+  border-right: none;
+  border-top: none;
+}
+
+.l1-corner.bottom-right {
+  bottom: 25px;
+  right: 25px;
+  border-left: none;
+  border-top: none;
+}
+
+/* ============================================
+   Central Panel
+   ============================================ */
+
+.l1-panel {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  margin: 20px;
+  opacity: 0;
+  transform: translateY(15px) scale(0.98);
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.l1-panel.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Panel frame */
+.l1-panel-frame {
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+}
+
+.l1-frame-line {
+  position: absolute;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(56, 139, 180, 0.35),
+    transparent
+  );
+}
+
+.l1-frame-line.top {
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+}
+
+.l1-frame-line.bottom {
+  bottom: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+}
+
+.l1-frame-line.left {
+  left: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(56, 139, 180, 0.35),
+    transparent
+  );
+}
+
+.l1-frame-line.right {
+  right: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(56, 139, 180, 0.35),
+    transparent
+  );
+}
+
+/* Panel content */
+.l1-panel-content {
+  background: rgba(13, 17, 23, 0.92);
+  border: 1px solid rgba(56, 139, 180, 0.12);
+  border-radius: 2px;
+  padding: 40px 32px;
+  backdrop-filter: blur(12px);
+}
+
+/* ============================================
+   Header
+   ============================================ */
+
+.l1-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.l1-icon-wrapper {
+  margin-bottom: 16px;
+}
+
+.l1-icon {
+  font-size: 2rem;
+  color: #388bb4;
+  opacity: 0.8;
+  display: inline-block;
+  animation: float-icon 4s ease-in-out infinite;
+}
+
+@keyframes float-icon {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.l1-title {
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: #c9d1d9;
+  margin: 0 0 6px 0;
+  letter-spacing: 0.08em;
+}
+
+.l1-subtitle {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #388bb4;
+  margin: 0;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: "SF Mono", "Consolas", monospace;
+}
+
+/* ============================================
+   Divider
+   ============================================ */
+
+.l1-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.l1-divider::before,
+.l1-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(56, 139, 180, 0.25),
+    transparent
+  );
+}
+
+.l1-divider-symbol {
+  margin: 0 12px;
+  color: rgba(56, 139, 180, 0.4);
+  font-size: 0.7rem;
+}
+
+/* ============================================
+   Description
+   ============================================ */
+
+.l1-description {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #6b7685;
+  line-height: 1.7;
+  margin: 0 0 28px 0;
+}
+
+/* ============================================
+   Form
+   ============================================ */
+
+.l1-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.5s ease-out;
+}
+
+.l1-form.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.l1-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.l1-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7685;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: "SF Mono", "Consolas", monospace;
+}
+
+.l1-input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1rem;
+  font-family: "SF Mono", "Consolas", monospace;
+  background: rgba(56, 139, 180, 0.04);
+  border: 1px solid rgba(56, 139, 180, 0.2);
+  border-radius: 2px;
+  color: #c9d1d9;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+
+.l1-input:focus {
+  outline: none;
+  border-color: rgba(56, 139, 180, 0.5);
+  background: rgba(56, 139, 180, 0.08);
+  box-shadow: 0 0 0 3px rgba(56, 139, 180, 0.1);
+}
+
+.l1-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.l1-input::placeholder {
+  color: #4a5568;
+}
+
+/* ============================================
+   Error Message
+   ============================================ */
+
+.l1-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  border-radius: 2px;
+  font-size: 0.85rem;
+  color: #f87171;
+}
+
+.l1-error-icon {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* ============================================
+   Submit Button
+   ============================================ */
+
+.l1-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #c9d1d9;
+  background: rgba(56, 139, 180, 0.12);
+  border: 1px solid rgba(56, 139, 180, 0.3);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+.l1-submit:hover:not(:disabled) {
+  background: rgba(56, 139, 180, 0.2);
+  border-color: rgba(56, 139, 180, 0.5);
+  box-shadow: 0 0 20px rgba(56, 139, 180, 0.15);
+  color: #ffffff;
+}
+
+.l1-submit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.l1-submit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.l1-submit-arrow {
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.l1-submit:hover:not(:disabled) .l1-submit-arrow {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+.l1-loading {
+  color: #6b7685;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+
+.l1-footer {
+  text-align: center;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(56, 139, 180, 0.08);
+}
+
+.l1-footer span {
+  font-size: 0.7rem;
+  color: #4a5568;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Layer Indicator
+   ============================================ */
+
+.l1-indicator {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  padding: 6px 14px;
+  background: rgba(56, 139, 180, 0.06);
+  border: 1px solid rgba(56, 139, 180, 0.15);
+  border-radius: 2px;
+}
+
+.l1-indicator span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #388bb4;
+  letter-spacing: 0.15em;
+  font-family: "SF Mono", "Consolas", monospace;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 480px) {
+  .l1-panel {
+    max-width: 100%;
+    margin: 15px;
+  }
+
+  .l1-panel-content {
+    padding: 32px 24px;
+  }
+
+  .l1-title {
+    font-size: 1.25rem;
+  }
+
+  .l1-input {
+    padding: 12px 14px;
+  }
+
+  .l1-corner {
+    width: 35px;
+    height: 35px;
+  }
+}

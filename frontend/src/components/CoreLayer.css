@@ -1,0 +1,264 @@
+/* CoreLayer.css - Layer 4 Core Styles */
+
+.core-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0d0d1a 0%, #1a0a2e 50%, #0d0d1a 100%);
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+}
+
+/* Header */
+.core-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 2px solid #6b3fa0;
+  margin-bottom: 30px;
+}
+
+.core-title h1 {
+  font-size: 2rem;
+  margin: 0;
+  background: linear-gradient(90deg, #9b59b6, #3498db);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.core-subtitle {
+  display: block;
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 5px;
+}
+
+.core-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: rgba(107, 63, 160, 0.2);
+  border: 1px solid #6b3fa0;
+  border-radius: 5px;
+}
+
+.pulse {
+  width: 12px;
+  height: 12px;
+  background: #5cb85c;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* Layer Map */
+.layer-map {
+  margin-bottom: 30px;
+}
+
+.layer-map h2 {
+  font-size: 1.2rem;
+  color: #9b59b6;
+  margin-bottom: 15px;
+}
+
+.layer-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+}
+
+.layer-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid #333;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+
+.layer-card:hover {
+  transform: translateY(-3px);
+  border-color: #9b59b6;
+  box-shadow: 0 5px 20px rgba(155, 89, 182, 0.3);
+}
+
+.layer-card.active {
+  border-color: #5cb85c;
+  box-shadow: 0 0 15px rgba(92, 184, 92, 0.5);
+}
+
+.layer-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #6b3fa0;
+}
+
+.layer-name {
+  font-size: 1rem;
+  margin: 10px 0 5px 0;
+}
+
+.layer-type {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.layer-status-badge {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 3px 10px;
+  font-size: 0.7rem;
+  border-radius: 3px;
+}
+
+.layer-status-badge.online {
+  background: rgba(92, 184, 92, 0.2);
+  color: #5cb85c;
+}
+
+.layer-status-badge.active {
+  background: rgba(155, 89, 182, 0.3);
+  color: #9b59b6;
+}
+
+.layer-status-badge.standby {
+  background: rgba(240, 173, 78, 0.2);
+  color: #f0ad4e;
+}
+
+/* System Monitor */
+.system-monitor {
+  margin-bottom: 30px;
+}
+
+.system-monitor h2 {
+  font-size: 1.2rem;
+  color: #9b59b6;
+  margin-bottom: 15px;
+}
+
+.monitor-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.monitor-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid #333;
+  padding: 20px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.monitor-label {
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.monitor-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #3498db;
+}
+
+/* System Log */
+.system-log {
+  margin-bottom: 30px;
+}
+
+.system-log h2 {
+  font-size: 1.2rem;
+  color: #9b59b6;
+  margin-bottom: 15px;
+}
+
+.log-container {
+  background: #000;
+  border: 1px solid #333;
+  padding: 15px;
+  max-height: 200px;
+  overflow-y: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  border-radius: 5px;
+}
+
+.log-line {
+  margin-bottom: 5px;
+}
+
+.log-timestamp {
+  color: #666;
+  margin-right: 10px;
+}
+
+.log-message {
+  color: #888;
+}
+
+/* Control Panel */
+.control-panel h2 {
+  font-size: 1.2rem;
+  color: #9b59b6;
+  margin-bottom: 15px;
+}
+
+.control-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.control-btn {
+  padding: 12px 25px;
+  background: rgba(107, 63, 160, 0.3);
+  border: 1px solid #6b3fa0;
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+
+.control-btn:hover {
+  background: rgba(107, 63, 160, 0.5);
+  transform: translateY(-2px);
+}
+
+.control-btn.remote {
+  background: rgba(52, 152, 219, 0.3);
+  border-color: #3498db;
+}
+
+.control-btn.remote:hover {
+  background: rgba(52, 152, 219, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .layer-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .monitor-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .layer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .control-buttons {
+    flex-direction: column;
+  }
+}

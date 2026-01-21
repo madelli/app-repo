@@ -1,16 +1,13 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import FirstLayer from "./components/FirstLayer";
-import SecondLayer from "./components/SecondLayer";
+/**
+ * Cold Operator - Application Shell
+ *
+ * この器は何も決めない。
+ * 全ての層への道筋は LayerRoutes に委ねられている。
+ */
+import LayerRoutes from "./routes/LayerRoutes";
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<FirstLayer />} />
-        <Route path="/layer2" element={<SecondLayer />} />
-      </Routes>
-    </Router>
-  );
+  return <LayerRoutes />;
 }
 
 export default App;

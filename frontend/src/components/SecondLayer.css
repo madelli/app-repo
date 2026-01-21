@@ -1,1 +1,598 @@
-/* SecondLayer styles */
+/**
+ * Layer 2 - Central Command Panel Styles
+ *
+ * Design principles:
+ * - Low saturation, cold color palette
+ * - Geometric patterns
+ * - Subtle animations
+ * - Floating panel aesthetic
+ */
+
+/* ============================================
+   Base Container
+   ============================================ */
+
+.layer2-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #0a0c10 0%, #0d1117 50%, #0a0c10 100%);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1.2s ease-out;
+}
+
+.layer2-container.visible {
+  opacity: 1;
+}
+
+/* ============================================
+   Background Elements
+   ============================================ */
+
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(56, 139, 180, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 139, 180, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.bg-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba(56, 139, 180, 0.08) 0%,
+    rgba(56, 139, 180, 0.02) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ============================================
+   Corner Markers
+   ============================================ */
+
+.corner-marker {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 1px solid rgba(56, 139, 180, 0.2);
+  pointer-events: none;
+}
+
+.corner-marker.top-left {
+  top: 30px;
+  left: 30px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner-marker.top-right {
+  top: 30px;
+  right: 30px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.corner-marker.bottom-left {
+  bottom: 30px;
+  left: 30px;
+  border-right: none;
+  border-top: none;
+}
+
+.corner-marker.bottom-right {
+  bottom: 30px;
+  right: 30px;
+  border-left: none;
+  border-top: none;
+}
+
+/* ============================================
+   Central Panel
+   ============================================ */
+
+.central-panel {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin: 20px;
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.central-panel.ready {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Panel frame */
+.panel-frame {
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+}
+
+.frame-line {
+  position: absolute;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(56, 139, 180, 0.4),
+    transparent
+  );
+}
+
+.frame-line.top {
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+}
+
+.frame-line.bottom {
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+}
+
+.frame-line.left {
+  left: 0;
+  top: 10%;
+  bottom: 10%;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(56, 139, 180, 0.4),
+    transparent
+  );
+}
+
+.frame-line.right {
+  right: 0;
+  top: 10%;
+  bottom: 10%;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(56, 139, 180, 0.4),
+    transparent
+  );
+}
+
+/* Panel content */
+.panel-content {
+  background: rgba(13, 17, 23, 0.9);
+  border: 1px solid rgba(56, 139, 180, 0.15);
+  border-radius: 2px;
+  padding: 40px 35px;
+  backdrop-filter: blur(10px);
+}
+
+/* ============================================
+   Panel Header
+   ============================================ */
+
+.panel-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  background: rgba(56, 139, 180, 0.1);
+  border: 1px solid rgba(56, 139, 180, 0.2);
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+
+.indicator-dot {
+  width: 6px;
+  height: 6px;
+  background: #388bb4;
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.indicator-text {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: #388bb4;
+  font-family: "SF Mono", "Consolas", monospace;
+}
+
+.panel-title {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #c9d1d9;
+  margin: 0 0 12px 0;
+  letter-spacing: 0.05em;
+  font-family: "Inter", -apple-system, sans-serif;
+}
+
+.panel-subtitle {
+  font-size: 0.85rem;
+  color: #6b7685;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ============================================
+   Panel Divider
+   ============================================ */
+
+.panel-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 25px 0;
+}
+
+.panel-divider::before,
+.panel-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(56, 139, 180, 0.3),
+    transparent
+  );
+}
+
+.divider-symbol {
+  margin: 0 15px;
+  color: rgba(56, 139, 180, 0.5);
+  font-size: 0.8rem;
+}
+
+/* ============================================
+   Action Buttons
+   ============================================ */
+
+.panel-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(56, 139, 180, 0.05);
+  border: 1px solid rgba(56, 139, 180, 0.15);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: left;
+}
+
+.action-button:hover {
+  background: rgba(56, 139, 180, 0.12);
+  border-color: rgba(56, 139, 180, 0.3);
+  transform: translateX(4px);
+}
+
+.action-button:active {
+  transform: translateX(2px);
+}
+
+.button-icon {
+  font-size: 1.2rem;
+  color: #388bb4;
+  width: 28px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.button-label {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #c9d1d9;
+  letter-spacing: 0.02em;
+}
+
+.button-sublabel {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #6b7685;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: "SF Mono", "Consolas", monospace;
+}
+
+/* Button variants */
+.action-button.console:hover {
+  border-color: rgba(46, 160, 67, 0.4);
+  background: rgba(46, 160, 67, 0.08);
+}
+
+.action-button.console:hover .button-icon {
+  color: #2ea043;
+}
+
+.action-button.core:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+  background: rgba(139, 92, 246, 0.08);
+}
+
+.action-button.core:hover .button-icon {
+  color: #8b5cf6;
+}
+
+.action-button.remote:hover {
+  border-color: rgba(56, 139, 180, 0.4);
+  background: rgba(56, 139, 180, 0.1);
+}
+
+.action-button.remote:hover .button-icon {
+  color: #388bb4;
+}
+
+/* ============================================
+   Panel Footer
+   ============================================ */
+
+.panel-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(56, 139, 180, 0.1);
+}
+
+.footer-text {
+  font-size: 0.7rem;
+  color: #4a5568;
+  letter-spacing: 0.05em;
+}
+
+.footer-separator {
+  color: rgba(56, 139, 180, 0.3);
+  font-size: 0.7rem;
+}
+
+/* ============================================
+   Layer Indicator
+   ============================================ */
+
+.layer-indicator {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  padding: 8px 16px;
+  background: rgba(56, 139, 180, 0.08);
+  border: 1px solid rgba(56, 139, 180, 0.2);
+  border-radius: 2px;
+}
+
+.layer-indicator span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #388bb4;
+  letter-spacing: 0.15em;
+  font-family: "SF Mono", "Consolas", monospace;
+}
+
+/* ============================================
+   3D Ritual Scene
+   ============================================ */
+
+.ritual-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 1.5s ease-out;
+  pointer-events: none;
+}
+
+.ritual-scene.active {
+  opacity: 1;
+}
+
+.ritual-core-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Enhance the glow behind the 3D scene */
+.layer2-container .bg-glow {
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(
+    circle,
+    rgba(0, 136, 204, 0.12) 0%,
+    rgba(56, 139, 180, 0.06) 30%,
+    rgba(0, 68, 102, 0.03) 50%,
+    transparent 70%
+  );
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Electric scan lines effect */
+.layer2-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 136, 204, 0.01) 2px,
+    rgba(0, 136, 204, 0.01) 4px
+  );
+  pointer-events: none;
+  z-index: 10;
+  animation: scan-lines 8s linear infinite;
+}
+
+@keyframes scan-lines {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100vh;
+  }
+}
+
+/* Ambient light rays */
+.layer2-container::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    rgba(0, 170, 255, 0.02) 30deg,
+    transparent 60deg,
+    rgba(0, 136, 204, 0.015) 90deg,
+    transparent 120deg,
+    rgba(0, 102, 153, 0.02) 150deg,
+    transparent 180deg,
+    rgba(0, 170, 255, 0.015) 210deg,
+    transparent 240deg,
+    rgba(0, 136, 204, 0.02) 270deg,
+    transparent 300deg,
+    rgba(0, 102, 153, 0.015) 330deg,
+    transparent 360deg
+  );
+  animation: rotate-rays 60s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes rotate-rays {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Ensure central panel is above 3D scene */
+.central-panel {
+  z-index: 5;
+}
+
+/* Corner markers above scene */
+.corner-marker {
+  z-index: 5;
+}
+
+/* Layer indicator above scene */
+.layer-indicator {
+  z-index: 5;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 480px) {
+  .central-panel {
+    max-width: 100%;
+    margin: 15px;
+  }
+
+  .panel-content {
+    padding: 30px 20px;
+  }
+
+  .panel-title {
+    font-size: 1.3rem;
+  }
+
+  .action-button {
+    padding: 14px 16px;
+  }
+
+  .corner-marker {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Adjust 3D scene for mobile */
+  .ritual-scene {
+    opacity: 0.7; /* Slightly reduced for better panel visibility */
+  }
+
+  .layer2-container .bg-glow {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Reduce scan line effect on mobile for performance */
+  .layer2-container::before {
+    animation-duration: 12s;
+  }
+
+  /* Simplify ambient rays on mobile */
+  .layer2-container::after {
+    animation-duration: 90s;
+  }
+}
+
+/* Tablet adjustments */
+@media (max-width: 768px) and (min-width: 481px) {
+  .ritual-scene {
+    opacity: 0.85;
+  }
+
+  .layer2-container .bg-glow {
+    width: 600px;
+    height: 600px;
+  }
+}
